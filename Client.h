@@ -13,7 +13,7 @@ class Client {
 private:
     Miner miner{};
     ix::WebSocket ws;
-    bool task_updated;
+    bool task_updated = false;
     std::string block_prefix;
     std::string block_suffix;
 

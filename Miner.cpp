@@ -13,7 +13,7 @@
 
 void Miner::init()
 {
-    unsigned char *source_str = sha256_cl;
+    unsigned char *source_str = kernels_sha256_cl;
 
     // init cl environment
     cl_int cl_err;

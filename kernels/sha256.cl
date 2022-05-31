@@ -409,7 +409,7 @@ __kernel void mine(__global const char *prefix, const int prefix_len,
 
   // hash payload
   unsigned int hash[8];
-  sha256(payload, payload_len, hash);
+  sha256((__global const unsigned int *)payload, payload_len, hash);
 
   // check if hash is less than target
   unsigned char target[32] = {0x00, 0x00, 0x00, 0x02, 0xaf, 0x00, 0x00, 0x00,

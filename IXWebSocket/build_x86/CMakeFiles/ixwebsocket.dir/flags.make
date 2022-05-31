@@ -6,7 +6,7 @@ CXX_DEFINES = -DIXWEBSOCKET_USE_SECURE_TRANSPORT -DIXWEBSOCKET_USE_TLS -DIXWEBSO
 
 CXX_INCLUDES = -I/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/IXWebSocket
 
-CXX_FLAGSx86_64 =  -Wall -Wextra -pedantic -Wshorten-64-to-32 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=c++11
+CXX_FLAGSx86_64 =  -Wall -Wextra -pedantic -Wshorten-64-to-32 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=11.5 -std=c++11
 
-CXX_FLAGS =  -Wall -Wextra -pedantic -Wshorten-64-to-32 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=c++11
+CXX_FLAGS =  -Wall -Wextra -pedantic -Wshorten-64-to-32 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=11.5 -std=c++11
 

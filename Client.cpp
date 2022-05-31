@@ -89,7 +89,7 @@ void Client::routine() {
             }
             while (ws.getReadyState() == ix::ReadyState::Open) {
                 next_task();
-                while (!task_updated) {
+                while (!this->task_updated) {
                     sleep_ms(100);
                 }
                 task_updated = false;
