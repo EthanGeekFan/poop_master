@@ -9,16 +9,17 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+#include "sha256_cl.h"
 
 #define NONCE_STR_LEN 64
 
 void Miner::init()
 {
     // read sha256.cl to char*
-    std::ifstream in("/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/sha256.cl");
-    std::string str((std::istreambuf_iterator<char>(in)),
-                    std::istreambuf_iterator<char>());
-    const char *source_str = str.c_str();
+//    std::ifstream in("/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/sha256.cl");
+//    std::string str((std::istreambuf_iterator<char>(in)),
+//                    std::istreambuf_iterator<char>());
+    unsigned char *source_str = sha256_cl;
 
     // init cl environment
     cl_int cl_err;
