@@ -1,7 +1,0 @@
-# ninja log v5
-0	658	1654024414758630360	CMakeFiles/poop_master.dir/main.cpp.o	e8d465493243545d
-0	744	1654024414850492915	CMakeFiles/poop_master.dir/Miner.cpp.o	1b5f41684a56ba7f
-3	2139	1654024416243390192	CMakeFiles/poop_master.dir/Client.cpp.o	d15114f14772c1c4
-2139	2271	1654024416374304392	poop_master	acdc7292f68dc415
-2	807	1654027848608242240	CMakeFiles/poop_master.dir/Miner.cpp.o	1b5f41684a56ba7f
-807	948	1654027848750954349	poop_master	acdc7292f68dc415
