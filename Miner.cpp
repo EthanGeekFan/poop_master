@@ -18,11 +18,41 @@ void Miner::init()
     // init cl environment
     cl_int cl_err;
     cl_err = clGetDeviceIDs(nullptr, CL_DEVICE_TYPE_GPU, 1, &device_id, nullptr);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to create a device group!\n");
+        exit(1);
+    }
     context = clCreateContext(nullptr, 1, &device_id, nullptr, nullptr, &cl_err);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to create a compute context!\n");
+        exit(1);
+    }
     commands = clCreateCommandQueue(context, device_id, 0, &cl_err);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to create a command queue!\n");
+        exit(1);
+    }
     program = clCreateProgramWithSource(context, 1, (const char **)&source_str, nullptr, &cl_err);
-    clBuildProgram(program, 0, nullptr, nullptr, nullptr, nullptr);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to create compute program!\n");
+        exit(1);
+    }
+    cl_err = clBuildProgram(program, 0, nullptr, nullptr, nullptr, nullptr);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to build program executable!\n");
+        exit(1);
+    }
     kernel = clCreateKernel(program, "mine", &cl_err);
+    if (cl_err != CL_SUCCESS)
+    {
+        printf("Error: Failed to create compute kernel!\n");
+        exit(1);
+    }
     cl_err = clGetKernelWorkGroupInfo(kernel, device_id, CL_KERNEL_WORK_GROUP_SIZE, sizeof(work_group_size), &work_group_size, nullptr);
     cl_err = clGetDeviceInfo(device_id, CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(compute_units), &compute_units, nullptr);
     cl_err = clGetDeviceInfo(device_id, CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof(dev_max_work_group_size), &dev_max_work_group_size, nullptr);
