@@ -1,0 +1,3 @@
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/cmake-build-release_x86/CMakeFiles/poop_master.dir
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/cmake-build-release_x86/CMakeFiles/edit_cache.dir
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/cmake-build-release_x86/CMakeFiles/rebuild_cache.dir

@@ -14,6 +14,7 @@ target_link_libraries(poop_master
 find_library(WebSocket_LIBRARY
         NAMES ixwebsocket
         )
+
 target_link_libraries(poop_master ${WebSocket_LIBRARY})
 target_link_libraries(poop_master z)
 
