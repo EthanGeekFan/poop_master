@@ -11,6 +11,11 @@ using json = nlohmann::json;
 Client::Client(std::string& url) {
     miner.init();
     ws.setUrl(url);
+    // handle keyboard interrupt
+    signal(SIGINT, [](int) {
+        std::cout << "Keyboard interrupt, exiting..." << std::endl;
+        exit(0);
+    });
     printf("Connecting to pool at %s\n", url.c_str());
     ws.setOnMessageCallback([this](const ix::WebSocketMessagePtr &msg) {
         if (msg->type == ix::WebSocketMessageType::Message) {
@@ -76,21 +81,23 @@ void sleep_ms(int ms) {
 }
 
 void Client::routine() {
-    try {
-        while (ws.getReadyState() != ix::ReadyState::Open) {
-            sleep_ms(100);
-        }
-        while (ws.getReadyState() == ix::ReadyState::Open) {
-            next_task();
-            while (!task_updated) {
+    while (true) {
+        try {
+            while (ws.getReadyState() != ix::ReadyState::Open) {
                 sleep_ms(100);
             }
-            task_updated = false;
-            start_task();
+            while (ws.getReadyState() == ix::ReadyState::Open) {
+                next_task();
+                while (!task_updated) {
+                    sleep_ms(100);
+                }
+                task_updated = false;
+                start_task();
+            }
+        } catch (const std::exception &e) {
+            std::cout << "Exception: " << e.what() << std::endl;
+//        ws.stop();
         }
-    } catch (const std::exception& e) {
-        std::cout << "Exception: " << e.what() << std::endl;
-        ws.stop();
     }
 }
 
