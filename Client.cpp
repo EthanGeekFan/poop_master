@@ -68,6 +68,7 @@ Client::Client(std::string& url) {
         }
     });
     ws.enableAutomaticReconnection();
+    ws.setPingInterval(45);
     ws.start();
     routine();
 }
@@ -96,7 +97,6 @@ void Client::routine() {
             }
         } catch (const std::exception &e) {
             std::cout << "Exception: " << e.what() << std::endl;
-//        ws.stop();
         }
     }
 }
