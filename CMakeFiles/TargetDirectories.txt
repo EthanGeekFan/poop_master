@@ -1,0 +1,3 @@
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/CMakeFiles/poop_master.dir
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/CMakeFiles/edit_cache.dir
+/Users/yifanyang/Documents/Study/Stanford/EE374/poop_master/CMakeFiles/rebuild_cache.dir
