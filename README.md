@@ -2,6 +2,36 @@
 
 PooPool Client written in C++. Mines Marabu with GPU(OpenCL).
 
+## Usage
+
+```shell
+./poop_master
+# or with custom boost argument
+./poop_master <boost_int>
+```
+
+The boost argument controls the number of work groups and affects the
+performance greatly. The default boost is set to 1, but this is quite
+slow for some cases. Please try different boost values. to find a potential
+optimal value for your machine.
+
+This `boost_int` value should be an integer >= 1. Recommended values:
+- `boost_int = 1`
+- `boost_int = 2`
+- `boost_int = 4`
+- `boost_int = 8`
+- `boost_int = 16`
+- `boost_int = 32`
+- `boost_int = 64`
+- `boost_int = 128`
+
+Do not try too large values, since this is related to GPU hardware.
+
+You could see a reported hashrate whenever you mined a block or a block
+is mined by another client. You can check the hashrate and try another `boost`
+argument to find a better working point.
+
+
 ## Instructions to compile
 
 ### Prerequisites
