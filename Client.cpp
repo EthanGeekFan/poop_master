@@ -8,8 +8,9 @@
 
 using json = nlohmann::json;
 
-Client::Client(std::string& url) {
+Client::Client(std::string& url, int boost) {
     miner.init();
+    this->boost = boost;
     ws.setUrl(url);
     // handle keyboard interrupt
     signal(SIGINT, [](int) {
@@ -110,7 +111,7 @@ void Client::update_task(const std::string &prefix, const std::string &suffix, u
                          unsigned int *nonce_end) {
     block_prefix = prefix;
     block_suffix = suffix;
-    miner.update_payload(prefix, suffix, nonce_start, nonce_end, 1);
+    miner.update_payload(prefix, suffix, nonce_start, nonce_end, this->boost);
     task_updated = true;
 }
 

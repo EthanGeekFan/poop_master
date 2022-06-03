@@ -16,6 +16,7 @@ private:
     bool task_updated = false;
     std::string block_prefix;
     std::string block_suffix;
+    int boost;
 
     void routine();
     void next_task();
@@ -23,7 +24,7 @@ private:
     void start_task();
 
 public:
-    explicit Client(std::string& url);
+    explicit Client(std::string& url, int boost);
     ~Client();
 };
 
