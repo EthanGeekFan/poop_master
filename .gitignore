@@ -1,4 +1,5 @@
 cmake-build-*/
+build/
 .DS_Store
 .idea/
 CMakeLists.txt.user
