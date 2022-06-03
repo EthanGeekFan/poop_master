@@ -44,6 +44,7 @@ Client::Client(std::string& url) {
                 } else if (msg_type == "newBlock") {
                     if (this->miner.task_status != TaskStatus::RUNNING) {
                         std::cout << "ERROR: Received newBlock while task is not running" << std::endl;
+                        this->next_task();
                         return;
                     }
                     // end task

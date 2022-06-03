@@ -11,12 +11,16 @@
 
 #define NONCE_STR_LEN 64
 
+static const unsigned int empty_out[17] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+
 void Miner::init()
 {
     unsigned char *source_str = kernels_sha256_cl;
 
     // init cl environment
     cl_int cl_err;
+    cl_platform_id platform_id;
     cl_err = clGetDeviceIDs(nullptr, CL_DEVICE_TYPE_GPU, 1, &device_id, nullptr);
     if (cl_err != CL_SUCCESS)
     {
@@ -115,11 +119,24 @@ void Miner::update_payload(const std::string& prefix, const std::string& suffix,
     suffix_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, suffix_len, nullptr, &cl_err);
     cl_err = clEnqueueWriteBuffer(commands, prefix_buffer, CL_TRUE, 0, prefix_len, prefix_c, 0, nullptr, nullptr);
     cl_err = clEnqueueWriteBuffer(commands, suffix_buffer, CL_TRUE, 0, suffix_len, suffix_c, 0, nullptr, nullptr);
+    if (nonce_start_buffer != nullptr)
+    {
+        clReleaseMemObject(nonce_start_buffer);
+    }
     nonce_start_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(unsigned int) * 8, nullptr, &cl_err);
     nonce_start_num = nonce_start;
     nonce_end_num = nonce_end;
     cl_err = clEnqueueWriteBuffer(commands, nonce_start_buffer, CL_TRUE, 0, sizeof(unsigned int) * 4, nonce_start_num, 0, nullptr, nullptr);
+    if (out_buffer != nullptr)
+    {
+        clReleaseMemObject(out_buffer);
+    }
     out_buffer = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(unsigned int) * 17, nullptr, &cl_err);
+    err = clEnqueueWriteBuffer(commands, out_buffer, CL_TRUE, 0, sizeof(unsigned int) * 17, empty_out, 0, nullptr, nullptr);
+    if (payload_mem_buffer != nullptr)
+    {
+        clReleaseMemObject(payload_mem_buffer);
+    }
     payload_mem_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(char) * payload_len * global, nullptr, &cl_err);
 }
 
