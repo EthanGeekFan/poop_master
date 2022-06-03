@@ -126,7 +126,7 @@ void Miner::update_payload(const std::string& prefix, const std::string& suffix,
     nonce_start_buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(unsigned int) * 8, nullptr, &cl_err);
     nonce_start_num = nonce_start;
     nonce_end_num = nonce_end;
-    cl_err = clEnqueueWriteBuffer(commands, nonce_start_buffer, CL_TRUE, 0, sizeof(unsigned int) * 4, nonce_start_num, 0, nullptr, nullptr);
+    cl_err = clEnqueueWriteBuffer(commands, nonce_start_buffer, CL_TRUE, 0, sizeof(unsigned int) * 8, nonce_start_num, 0, nullptr, nullptr);
     if (out_buffer != nullptr)
     {
         clReleaseMemObject(out_buffer);

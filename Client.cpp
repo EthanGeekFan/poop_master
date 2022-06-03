@@ -110,7 +110,7 @@ void Client::update_task(const std::string &prefix, const std::string &suffix, u
                          unsigned int *nonce_end) {
     block_prefix = prefix;
     block_suffix = suffix;
-    miner.update_payload(prefix, suffix, nonce_start, nonce_end, 128);
+    miner.update_payload(prefix, suffix, nonce_start, nonce_end, 1);
     task_updated = true;
 }
 
