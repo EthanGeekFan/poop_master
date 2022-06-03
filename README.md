@@ -8,6 +8,7 @@ PooPool Client written in C++. Mines Marabu with GPU(OpenCL).
 ./poop_master
 # or with custom boost argument
 ./poop_master <boost_int>
+# e.g. ./poop_master 4
 ```
 
 The boost argument controls the number of work groups and affects the
