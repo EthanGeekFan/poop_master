@@ -20,7 +20,7 @@ private:
 
     void routine();
     void next_task();
-    void update_task(const std::string& prefix, const std::string& suffix, unsigned int *nonce_start, unsigned int *nonce_end);
+    void update_task(std::string prefix, std::string suffix, unsigned int *nonce_start, unsigned int *nonce_end);
     void start_task();
 
 public:

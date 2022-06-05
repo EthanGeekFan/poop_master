@@ -33,12 +33,10 @@ Client::Client(std::string& url, int boost) {
                     for (int i = 0; i < 8; i++) {
                         nonce_start[i] = data.at("task").at("nonce_start").at(i);
                     }
-                    printf("\n");
                     unsigned int nonce_end[8];
                     for (int i = 0; i < 8; i++) {
                         nonce_end[i] = data.at("task").at("nonce_end").at(i);
                     }
-                    printf("\n");
                     std::string block_prefix = data["task"]["block_prefix"];
                     std::string block_suffix = data["task"]["block_suffix"];
                     update_task(block_prefix, block_suffix, nonce_start, nonce_end);
@@ -91,9 +89,11 @@ void Client::routine() {
             }
             while (ws.getReadyState() == ix::ReadyState::Open) {
                 next_task();
+                std::cout << "Waiting for task update..." << std::endl;
                 while (!this->task_updated) {
                     sleep_ms(100);
                 }
+                std::cout << "Task Updated\n" << std::endl;
                 task_updated = false;
                 start_task();
             }
@@ -107,7 +107,7 @@ void Client::next_task() {
     ws.send(R"({"type":"gpu_task"})");
 }
 
-void Client::update_task(const std::string &prefix, const std::string &suffix, unsigned int *nonce_start,
+void Client::update_task(std::string prefix, std::string suffix, unsigned int *nonce_start,
                          unsigned int *nonce_end) {
     block_prefix = prefix;
     block_suffix = suffix;
