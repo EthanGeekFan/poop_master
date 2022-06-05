@@ -8,9 +8,10 @@
 
 using json = nlohmann::json;
 
-Client::Client(std::string& url, int boost) {
+Client::Client(std::string& url, std::string SUNetID, int boost) {
     miner.init();
     this->boost = boost;
+    this->SUNetID = SUNetID;
     ws.setUrl(url);
     // handle keyboard interrupt
     signal(SIGINT, [](int) {
@@ -50,7 +51,8 @@ Client::Client(std::string& url, int boost) {
                     this->miner.stop = true;
                 } else if (msg_type == "error") {
                     this->miner.stop = true;
-                    this->ws.stop();
+                } else if (msg_type == "confirm") {
+                    std::cout << "Contributed 1 credit as " << data["SUNetID"] << std::endl;
                 } else {
                     printf("Unknown message type: %s\n", msg_type.c_str());
                 }
@@ -132,6 +134,7 @@ void Client::start_task() {
         json data;
         data["type"] = "submit";
         data["block"] = block_str;
+        data["SUNetID"] = SUNetID;
         ws.send(data.dump());
     } else {
         std::cout << "Failed mining block" << std::endl;

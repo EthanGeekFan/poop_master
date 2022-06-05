@@ -17,6 +17,7 @@ private:
     std::string block_prefix;
     std::string block_suffix;
     int boost;
+    std::string SUNetID;
 
     void routine();
     void next_task();
@@ -24,7 +25,7 @@ private:
     void start_task();
 
 public:
-    explicit Client(std::string& url, int boost);
+    explicit Client(std::string& url, std::string SUNetID, int boost);
     ~Client();
 };
 
