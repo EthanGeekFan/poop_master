@@ -5,10 +5,10 @@ PooPool Client written in C++. Mines Marabu with GPU(OpenCL).
 ## Usage
 
 ```shell
-./poop_master
+./poop_master <SUNetID>
 # or with custom boost argument
-./poop_master <boost_int>
-# e.g. ./poop_master 4
+./poop_master <SUNetID> [boost_int]
+# e.g. ./poop_master xxxxx 4
 ```
 
 The boost argument controls the number of work groups and affects the
